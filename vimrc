@@ -69,6 +69,5 @@ nnoremap <C-left> :tabprevious<CR>
 nnoremap <C-right> :tabnext<CR>
 nnoremap <silent> <A-left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-right> :execute 'silent! tabmove ' . tabpagenr()<CR>
-let g:clj_highlight_builtins = 1
-let g:clj_paren_rainbow=1
-
+let clojure#HighlightBuiltins = 1
+let clojure#ParenRainbow = 1

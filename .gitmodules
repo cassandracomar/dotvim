@@ -4,3 +4,18 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/mortice/taglist.vim.git
+[submodule "bundle/alternate"]
+	path = bundle/alternate
+	url = https://github.com/vim-scripts/a.vim.git
+[submodule "bundle/vimclojure"]
+	path = bundle/vimclojure
+	url = https://github.com/vim-scripts/VimClojure.git
+[submodule "bundle/tasklist"]
+	path = bundle/tasklist
+	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "bundle/cvim"]
+	path = bundle/cvim
+	url = https://github.com/vim-scripts/c.vim.git
+[submodule "bundle/pythonvim"]
+	path = bundle/pythonvim
+	url = https://github.com/vim-scripts/python.vim.git
