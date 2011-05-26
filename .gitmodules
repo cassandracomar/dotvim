@@ -18,7 +18,7 @@
 	url = https://github.com/vim-scripts/c.vim.git
 [submodule "bundle/pythonvim"]
 	path = bundle/pythonvim
-	url = https://github.com/vim-scripts/python.vim.git
+	url = https://github.com/vim-scripts/python.vim
 [submodule "bundle/screen"]
 	path = bundle/screen
 	url = https://github.com/ervandew/screen.git
