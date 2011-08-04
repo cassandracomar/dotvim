@@ -1,24 +1,23 @@
 $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == idioms.function ==
-void<CURSOR>
-|?FUNCTION_NAME| ( <+argument list+> )
-{
+void<CURSOR> |?FUNCTION_NAME| ( <+argument list+> ) {
+
 <SPLIT>	return <+return value+>;
+
 }		// -----  end of function |FUNCTION_NAME|  -----
 $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == idioms.function-static ==
-static void<CURSOR>
-|?FUNCTION_NAME| ( <+argument list+> )
-{
+static void<CURSOR> |?FUNCTION_NAME| ( <+argument list+> ){
+
 <SPLIT>	return <+return value+>;
+
 }		// -----  end of static function |FUNCTION_NAME|  -----
 $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == idioms.main ==
 #include	<cstdlib>
 
-int
-main ( int argc, char *argv[] )
-{<CURSOR>
+int main ( int argc, char *argv[] ) {<CURSOR>
+
 <SPLIT>	return EXIT_SUCCESS;
 }				// ----------  end of function main  ----------
 $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,8 +26,9 @@ enum |?ENUM_NAME| {<CURSOR>
 <SPLIT>};				// ----------  end of enum |ENUM_NAME|  ----------
 $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == idioms.struct ==
-struct |?STRUCT_NAME| {<CURSOR>
-<SPLIT>};				// ----------  end of struct |STRUCT_NAME|  ----------
+typedef struct _|?STRUCT_NAME| {<CURSOR>
+
+<SPLIT>} |STRUCT_NAME|;				// ----------  end of struct |STRUCT_NAME|  ----------
 $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == idioms.union ==
 union |?UNION_NAME| {<CURSOR>

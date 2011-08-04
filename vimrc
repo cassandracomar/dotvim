@@ -46,7 +46,25 @@ set smartcase
 set foldenable
 set mousehide
 set mouse=a
+
+set foldmethod=syntax
+nnoremap <leader>o zo
+nnoremap <leader>a za
+nnoremap <leader>c zc
+nnoremap <leader>m zM
+nnoremap <leader>r zR
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
 nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>s <C-w>s<C-w>j
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+
 
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 nmap <leader>ev :tabedit $MYVIMRC<cr>
@@ -84,33 +102,20 @@ else
      let sep=":"
 endif
 
-let classpath = join ( 
-   \[".",
-   \ "src", "src/main/clojure", "src/main/resources",
-   \ "test", "src/test/clojure", "src/test/resources",
-   \ "classes", "target/classes",
-   \ "lib/*", "lib/dev/*",
-   \ "bin",
-   \ vimfiles."/lib/*"
-   \],
-   \ sep )
+" configure tags - add additional tags here or comment out not-used ones
+set tags+=~/.vim/tags/cpp
+" build tags of your own project with Ctrl-F12
+map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
-" Settings for VimClojure
- let vimclojureRoot = vimfiles."/bundle/vimclojure"
- let vimclojure#HighlightBuiltins=1
- let vimclojure#HighlightContrib=1
- let vimclojure#DynamicHighlighting=1
- let vimclojure#ParenRainbow=1
- let vimclojure#WantNailgun = 1
- let vimclojure#NailgunClient = vimclojureRoot."/lib/nailgun/ng"
-" if windows
-"     " In stupid windows, no forward slashes, and tack on .exe
-"         let vimclojure#NailgunClient = substitute(vimclojure#NailgunClient,
-"         "/", "\\", "g") . ".exe"
-"         endif
-"
-"         " Start vimclojure nailgun server (uses screen.vim to manage
-"         lifetime)
-nmap <silent> <Leader>sc :execute "ScreenShell java -cp \"" . classpath . sep . vimclojureRoot . "/lib/*" . "\" vimclojure.nailgun.NGServer 127.0.0.1" <cr>
-" Start a generic Clojure repl (uses screen.vim)
-nmap <silent> <Leader>sC :execute "ScreenShell java -cp \"" . classpath . "\" clojure.main" <cr>
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
