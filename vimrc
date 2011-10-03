@@ -12,6 +12,7 @@ let Tlist_Use_Horiz_Window=0
 
 nnoremap TT :TlistToggle<CR>
 map <F4> :TlistToggle<CR>
+map <F5> :TlistAddFiles src/*.cpp include/*.h
 
 let Tlist_Use_Right_Window = 1
 let Tlist_Compact_Format = 1
@@ -104,8 +105,12 @@ endif
 
 " configure tags - add additional tags here or comment out not-used ones
 set tags+=~/.vim/tags/cpp
+set tags+=~/.vim/tags/gl
+set tags+=~/.vim/tags/cv
+
 " build tags of your own project with Ctrl-F12
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <F12> set tags+=./tags
 
 " OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
