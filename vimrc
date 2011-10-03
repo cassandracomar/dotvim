@@ -110,7 +110,7 @@ set tags+=~/.vim/tags/cv
 
 " build tags of your own project with Ctrl-F12
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-map <F12> set tags+=./tags
+map <F12> :set tags+=./tags
 
 " OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
