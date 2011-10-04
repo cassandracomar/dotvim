@@ -12,7 +12,7 @@ let Tlist_Use_Horiz_Window=0
 
 nnoremap TT :TlistToggle<CR>
 map <F4> :TlistToggle<CR>
-map <F5> :TlistAddFiles src/*.cpp include/*.h
+map <F5> :TlistAddFiles src/*.cpp include/*.h ../include/*.h ../src/*.cpp *.cpp *.h<CR>
 
 let Tlist_Use_Right_Window = 1
 let Tlist_Compact_Format = 1
@@ -120,7 +120,7 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
 let OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "cv"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
