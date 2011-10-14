@@ -4,6 +4,8 @@ call pathogen#runtime_append_all_bundles()
 filetype off
 set number
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+set pastetoggle=<F3>
+nnoremap <F3> :set invpaste<CR>
 
 let g:ctags_statusline=1
 let generate_tags=1
