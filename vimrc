@@ -22,6 +22,9 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_File_Fold_Auto_close = 1
 
+let g:alternateNoDefaultAlternate = 1
+let g:alternateRelativeFiles = 1
+
 let mapleader=","
 filetype on
 filetype plugin on
