@@ -71,6 +71,8 @@ nnoremap <leader>l <C-w>l
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 
+nnoremap <leader>d [i
+inoremap <leader>c <C-n>
 
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 nmap <leader>ev :tabedit $MYVIMRC<cr>
@@ -129,3 +131,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "cv"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+let g:haddock_browser = "open"
+let g:haddock_browser_callformat = "%s %s"
