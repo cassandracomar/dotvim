@@ -77,10 +77,8 @@ nnoremap <leader>k <C-w>k
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 nmap <leader>ev :tabedit $MYVIMRC<cr>
 autocmd BufEnter * cd %:p:h
-imap <leader><tab><C-x><C-o>
 set wildmenu
 set wildmode=list:longest
-set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
@@ -158,4 +156,3 @@ function! s:check_and_lint()
     echo "No errors found"
   endif
 endfunction
-set cpoptions=B$
