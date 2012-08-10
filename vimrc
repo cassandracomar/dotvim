@@ -1,6 +1,7 @@
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
+colo wombat
 filetype off
 set number
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
@@ -53,6 +54,7 @@ set foldenable
 set mousehide
 set mouse=a
 
+
 set foldmethod=syntax
 nnoremap <leader>o zo
 nnoremap <leader>a za
@@ -71,8 +73,6 @@ nnoremap <leader>l <C-w>l
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 
-nnoremap <leader>d [i
-inoremap <leader>c <C-n>
 
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 nmap <leader>ev :tabedit $MYVIMRC<cr>
@@ -119,7 +119,7 @@ set tags+=~/.vim/tags/cv
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <F12> :set tags+=./tags;/home/arjun<CR>
 
-" OmniCppComplete
+ "OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
@@ -132,5 +132,30 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "cv"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-let g:haddock_browser = "open"
-let g:haddock_browser_callformat = "%s %s"
+" use ghc functionality for haskell files
+let g:ghc="/usr/bin/ghc"
+au Bufenter *.hs compiler ghc
+let g:haddock_browser = "/usr/bin/firefox-aurora"
+let g:GHCStaticOptions = "-O2"
+nnoremap <leader>d [i
+inoremap <leader>c <C-n>
+nmap <leader>R :GHCReload<CR>
+nmap <leader>i _i
+nmap <leader>hh _?
+nmap <leader>hs _?1
+nmap <leader>e _t
+nmap <leader>ie _ie
+nmap <leader>g :make<CR>
+nmap <leader>G :GHCi 
+
+autocmd BufWritePost *.hs call s:check_and_lint()
+function! s:check_and_lint()
+  let l:qflist = ghcmod#make('check')
+  call extend(l:qflist, ghcmod#make('lint'))
+  call setqflist(l:qflist)
+  cwindow
+  if empty(l:qflist)
+    echo "No errors found"
+  endif
+endfunction
+set cpoptions=B$
