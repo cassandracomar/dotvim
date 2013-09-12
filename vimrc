@@ -72,7 +72,10 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>l <C-w>l
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
-
+nnoremap d<leader>^ maj^mb`ad`b
+nnoremap d<leader>g^ mak^mb`ad`b
+nnoremap d<leader>$ mak$mb`ad`b
+nnoremap d<leader>g$ maj$mb`ad`b
 
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 nmap <leader>ev :tabedit $MYVIMRC<cr>
@@ -130,11 +133,39 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "cv"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
+function! s:find_basedir() "{{{
+" search Cabal file
+  if !exists('b:ghcmod_basedir')
+    let l:ghcmod_basedir = expand('%:p:h')
+    let l:dir = l:ghcmod_basedir
+    for _ in range(6)
+      if !empty(glob(l:dir . '/*.cabal', 0))
+        let l:ghcmod_basedir = l:dir
+        break
+      endif
+      let l:dir = fnamemodify(l:dir, ':h')
+    endfor
+    let b:ghcmod_basedir = l:ghcmod_basedir
+  endif
+  return b:ghcmod_basedir
+endfunction "}}}
+
 " use ghc functionality for haskell files
+let sandbox_dir = '/.cabal-sandbox/x86_64-linux-ghc-7.6.3-packages.conf.d'
 let g:ghc="/usr/bin/ghc"
-au Bufenter *.hs compiler ghc
+augroup filetype_hs
+    autocmd!
+    autocmd Bufenter *.hs compiler ghc
+    autocmd Bufenter *.hs let b:ghc_staticoptions = '-package-db ' . s:find_basedir() . sandbox_dir
+augroup END
 let g:haddock_browser = "/usr/bin/firefox-aurora"
 let g:GHCStaticOptions = "-O2"
+let g:haskell_jmacro        = 0
+
+let g:ghcmod_ghc_options = ['-package-db ' . dir]
+hi ghcmodType ctermbg=yellow
+let g:ghcmod_type_highlight = 'ghcmodType'
+
 nnoremap <leader>d [i
 inoremap <leader>c <C-n>
 nmap <leader>R :GHCReload<CR>
@@ -144,15 +175,6 @@ nmap <leader>hs _?1
 nmap <leader>e _t
 nmap <leader>ie _ie
 nmap <leader>g :make<CR>
-nmap <leader>G :GHCi 
+nmap <leader>G :! cabal repl 
 
-autocmd BufWritePost *.hs call s:check_and_lint()
-function! s:check_and_lint()
-  let l:qflist = ghcmod#make('check')
-  call extend(l:qflist, ghcmod#make('lint'))
-  call setqflist(l:qflist)
-  cwindow
-  if empty(l:qflist)
-    echo "No errors found"
-  endif
-endfunction
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
