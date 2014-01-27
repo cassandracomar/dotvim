@@ -1,10 +1,19 @@
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+set encoding=utf-8
 
-colo wombat
+if has("gui_running")
+    set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
+    set gfn=Inconsolata-dz\ for\ Powerline\ 11
+    set guifontwide=Ubuntu\ Mono\ 11
+endif
+
+colo wombat256
+hi Conceal guibg=DarkGray guifg=White
 filetype off
 set number
-nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+nnoremap <F2> :set nonumber!<CR>
+set foldcolumn=1
 set pastetoggle=<F3>
 nnoremap <F3> :set invpaste<CR>
 
@@ -44,7 +53,7 @@ set smartindent
 set autoindent
 set laststatus=2
 set wrap
-set textwidth=79
+set textwidth=120
 set formatoptions=qrn1
 set incsearch
 set hlsearch
@@ -78,7 +87,7 @@ nnoremap d<leader>$ mak$mb`ad`b
 nnoremap d<leader>g$ maj$mb`ad`b
 
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
-nmap <leader>ev :tabedit $MYVIMRC<cr>
+nmap <leader>ev :tabedit ~/.vim/vimrc<cr>
 autocmd BufEnter * cd %:p:h
 set wildmenu
 set wildmode=list:longest
@@ -89,9 +98,26 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvis
 if has("autocmd")
 	augroup myvimrchooks
 	au!
-	autocmd bufwritepost .vimrc source ~/.vimrc
+	autocmd bufwritepost ~/.vim/vimrc source ~/.vimrc
 	augroup END
 endif
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
 nnoremap <C-left> :tabprevious<CR>
 nnoremap <C-right> :tabnext<CR>
@@ -120,34 +146,56 @@ set tags+=~/.vim/tags/cv
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <F12> :set tags+=./tags;/home/arjun<CR>
 
- "OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "cv"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <silent><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <BS>: close popup and delete backword char.
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() . "\<Space>" : "\<Space>"
+
+let g:neocomplete#enable_insert_char_pre = 1
+inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python let b:did_ftplugin = 1
+set ofu=syntaxcomplete#Complete
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
 
 function! s:find_basedir() "{{{
 " search Cabal file
-  if !exists('b:ghcmod_basedir')
-    let l:ghcmod_basedir = expand('%:p:h')
-    let l:dir = l:ghcmod_basedir
-    for _ in range(6)
-      if !empty(glob(l:dir . '/*.cabal', 0))
-        let l:ghcmod_basedir = l:dir
-        break
-      endif
-      let l:dir = fnamemodify(l:dir, ':h')
-    endfor
-    let b:ghcmod_basedir = l:ghcmod_basedir
-  endif
-  return b:ghcmod_basedir
+    if !exists('b:ghcmod_basedir')
+        let l:ghcmod_basedir = expand('%:p:h')
+        let l:dir = l:ghcmod_basedir
+        for _ in range(6)
+            if !empty(glob(l:dir . '/*.cabal', 0))
+                let l:ghcmod_basedir = l:dir
+                break
+            endif
+            let l:dir = fnamemodify(l:dir, ':h')
+        endfor
+        let b:ghcmod_basedir = l:ghcmod_basedir
+    endif
+    return b:ghcmod_basedir
 endfunction "}}}
 
 " use ghc functionality for haskell files
@@ -156,18 +204,29 @@ let g:ghc="/usr/bin/ghc"
 augroup filetype_hs
     autocmd!
     autocmd Bufenter *.hs compiler ghc
-    autocmd Bufenter *.hs let b:ghc_staticoptions = '-package-db ' . s:find_basedir() . sandbox_dir
+    let basedir = ""
+    autocmd Bufenter *.hs let basedir = s:find_basedir()
+    if basedir != ""
+        autocmd Bufenter *.hs let dir = basedir . sandbox_dir
+        autocmd Bufenter *.hs let b:ghc_staticoptions = '-package-db ' . dir . ' -fno-warn-missing-signatures'
+        autocmd Bufenter *.hs let g:ghcmod_ghc_options = ['-package-db ' . dir, '-fno-warn-missing-signatures']
+        autocmd BufEnter *.hs let g:GHCStaticOptions = '-package-db' . dir . ' -fno-warn-missing-signatures'
+    endif
+    autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 augroup END
 let g:haddock_browser = "/usr/bin/firefox-aurora"
 let g:GHCStaticOptions = "-O2"
 let g:haskell_jmacro        = 0
 
-let g:ghcmod_ghc_options = ['-package-db ' . dir]
 hi ghcmodType ctermbg=yellow
 let g:ghcmod_type_highlight = 'ghcmodType'
+let g:haskell_conceal_wide = 1
+
+let g:necoghc_enable_detailed_browse = 1
+let g:neocomplete#force_overwrite_completefunc = 1
 
 nnoremap <leader>d [i
-inoremap <leader>c <C-n>
+inoremap <leader>c <C-x><C-o>
 nmap <leader>R :GHCReload<CR>
 nmap <leader>i _i
 nmap <leader>hh _?
@@ -175,6 +234,15 @@ nmap <leader>hs _?1
 nmap <leader>e _t
 nmap <leader>ie _ie
 nmap <leader>g :make<CR>
-nmap <leader>G :! cabal repl 
+nmap <leader>G s:cabalrepl()<CR>
+nmap <leader>t :GhcModType <CR>
+nmap <leader>q :noh<CR>
 
-autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+function! s:cabalrepl()
+    return ':cd ' . s:find_basedir() . '\<CR>' . ' cabal repl %p\<CR>'
+endfunction
+
+
+let g:pymode_run_key = '<leader>R'
+let g:pymode_lint_checher = "pyflakes"
+let g:jedi#rename_command = "<leader>RR"
