@@ -231,11 +231,10 @@ nmap <leader>R :GHCReload<CR>
 nmap <leader>i _i
 nmap <leader>hh _?
 nmap <leader>hs _?1
-nmap <leader>e _t
 nmap <leader>ie _ie
 nmap <leader>g :make<CR>
 nmap <leader>G s:cabalrepl()<CR>
-nmap <leader>t :GhcModType <CR>
+nmap <leader>e :GhcModType <CR>
 nmap <leader>q :noh<CR>
 
 function! s:cabalrepl()
