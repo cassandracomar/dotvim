@@ -2,11 +2,9 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 set encoding=utf-8
 
-if has("gui_running")
-    set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
-    set gfn=Inconsolata-dz\ for\ Powerline\ 11
-    set guifontwide=Ubuntu\ Mono\ 11
-endif
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
+set gfn=Inconsolata-dz\ for\ Powerline\ 11
+set guifontwide=Ubuntu\ Mono\ 11
 
 colo wombat256
 hi Conceal guibg=DarkGray guifg=White
@@ -62,7 +60,6 @@ set smartcase
 set foldenable
 set mousehide
 set mouse=a
-
 
 set foldmethod=syntax
 nnoremap <leader>o zo
@@ -245,3 +242,5 @@ endfunction
 let g:pymode_run_key = '<leader>R'
 let g:pymode_lint_checher = "pyflakes"
 let g:jedi#rename_command = "<leader>RR"
+
+
