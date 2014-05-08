@@ -4,9 +4,6 @@
 [submodule "bundle/alternate"]
 	path = bundle/alternate
 	url = https://github.com/vim-scripts/a.vim.git
-[submodule "bundle/vimclojure"]
-	path = bundle/vimclojure
-	url = https://github.com/simon-hicks/VimClojure
 [submodule "bundle/tasklist"]
 	path = bundle/tasklist
 	url = https://github.com/vim-scripts/TaskList.vim.git
@@ -73,3 +70,30 @@
 [submodule "bundle/vim-latex"]
 	path = bundle/vim-latex
 	url = git://git.code.sf.net/p/vim-latex/vim-latex
+[submodule "bundle/vim-dispatch"]
+	path = bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = git@github.com:bling/vim-airline.git
+[submodule "bundle/vim-leiningen"]
+	path = bundle/vim-leiningen
+	url = git://github.com/tpope/vim-leiningen.git
+[submodule "bundle/vim-projectionist"]
+	path = bundle/vim-projectionist
+	url = git://github.com/tpope/vim-projectionist.git
+[submodule "bundle/vim-fireplace"]
+	path = bundle/vim-fireplace
+	url = git://github.com/tpope/vim-fireplace.git
+[submodule "bundle/vim-clojure-static"]
+	path = bundle/vim-clojure-static
+	url = git://github.com/guns/vim-clojure-static.git
+[submodule "bundle/rainbow_parenthesis.vim"]
+	path = bundle/rainbow_parenthesis.vim
+	url = git://github.com/kien/rainbow_parentheses.vim
+[submodule "bundle/vim-clojure-highlight"]
+	path = bundle/vim-clojure-highlight
+	url = https://github.com/guns/vim-clojure-highlight
+[submodule "bundle/vim-sexp-mappings-for-regular-people"]
+	path = bundle/vim-sexp-mappings-for-regular-people
+	url = git://github.com/tpope/vim-sexp-mappings-for-regular-people.git

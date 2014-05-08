@@ -14,7 +14,11 @@ nnoremap <F2> :set nonumber!<CR>
 set foldcolumn=1
 set pastetoggle=<F3>
 nnoremap <F3> :set invpaste<CR>
+command! W write
 
+set backupdir=~/tmp
+set directory=~/tmp
+set undodir=~/tmp
 let g:ctags_statusline=1
 let generate_tags=1
 
@@ -196,24 +200,17 @@ function! s:find_basedir() "{{{
 endfunction "}}}
 
 " use ghc functionality for haskell files
-let sandbox_dir = '/.cabal-sandbox/x86_64-linux-ghc-7.6.3-packages.conf.d'
 let g:ghc="/usr/bin/ghc"
 augroup filetype_hs
     autocmd!
     autocmd Bufenter *.hs compiler ghc
-    let basedir = ""
-    autocmd Bufenter *.hs let basedir = s:find_basedir()
-    if basedir != ""
-        autocmd Bufenter *.hs let dir = basedir . sandbox_dir
-        autocmd Bufenter *.hs let b:ghc_staticoptions = '-package-db ' . dir . ' -fno-warn-missing-signatures'
-        autocmd Bufenter *.hs let g:ghcmod_ghc_options = ['-package-db ' . dir, '-fno-warn-missing-signatures']
-        autocmd BufEnter *.hs let g:GHCStaticOptions = '-package-db' . dir . ' -fno-warn-missing-signatures'
-    endif
     autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 augroup END
 let g:haddock_browser = "/usr/bin/firefox-aurora"
 let g:GHCStaticOptions = "-O2"
 let g:haskell_jmacro        = 0
+let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
+let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-missing-signatures'
 
 hi ghcmodType ctermbg=yellow
 let g:ghcmod_type_highlight = 'ghcmodType'
@@ -260,3 +257,18 @@ nnoremap <leader>go :Git checkout<leader>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
+augroup filetype_clj
+    autocmd!
+    au BufEnter *.clj RainbowParenthesesToggle
+    au Syntax *.clj RainbowParenthesesLoadRound
+    au Syntax *.clj RainbowParenthesesLoadSquare
+    au Syntax *.clj RainbowParenthesesLoadBraces
+augroup END
+
+let g:clojure_syntax_keywords = {
+    \ 'clojureMacro': ["defproject", "defcustom"],
+    \ 'clojureFunc': ["string/join", "string/replace"]
+    \ }
+
+nnoremap <leader>ce :Eval<CR>
+nnoremap <leader>%ce :%Eval<CR>
