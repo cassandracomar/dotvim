@@ -3,10 +3,10 @@ call pathogen#runtime_append_all_bundles()
 set encoding=utf-8
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
-set gfn=Inconsolata-dz\ for\ Powerline\ 11
-set guifontwide=Ubuntu\ Mono\ 11
+set gfn=Inconsolata\ 14
+set guifontwide=Ubuntu\ Mono\ 14
 
-colo wombat256
+colo wombat
 hi Conceal guibg=DarkGray guifg=White
 filetype off
 set number
@@ -25,8 +25,11 @@ let generate_tags=1
 let Tlist_Use_Horiz_Window=0
 
 nnoremap TT :TlistToggle<CR>
-map <F4> :TlistToggle<CR>
 map <F5> :TlistAddFiles src/*.cpp include/*.h ../include/*.h ../src/*.cpp *.cpp *.h<CR>
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <F4> :NERDTreeToggle<CR>
 
 let Tlist_Use_Right_Window = 1
 let Tlist_Compact_Format = 1
@@ -46,9 +49,9 @@ set autowrite
 set ruler
 
 set showcmd
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 set smartindent

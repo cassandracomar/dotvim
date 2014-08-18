@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/arjun/src/mps_service'
+let g:netrw_dirhist_2='/usr/share/eclipse'
+let g:netrw_dirhist_3='/home/arjun/src/requesttier/cookbooks/req_tier/.kitchen'
+let g:netrw_dirhist_4='/home/arjun/src/programmatic-svcs/.kitchen'
+let g:netrw_dirhist_5='/home/arjun/src/adcom_tomcat'
+let g:netrw_dirhist_6='/home/arjun/tmp/dev_configs/properties'
+let g:netrw_dirhist_7='/home/arjun/src/programmatic-svcs/recipes'
+let g:netrw_dirhist_8='/home/arjun/src/programmatic-svcs/attributes'
+let g:netrw_dirhist_9='/home/arjun/src/requesttier'
