@@ -1,13 +1,12 @@
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+set t_Co=256
 set encoding=utf-8
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 set gfn=Inconsolata\ 14
 set guifontwide=Ubuntu\ Mono\ 14
 
 colo wombat
-hi Conceal guibg=DarkGray guifg=White
 filetype off
 set number
 nnoremap <F2> :set nonumber!<CR>
@@ -40,6 +39,8 @@ let Tlist_File_Fold_Auto_close = 1
 let g:alternateNoDefaultAlternate = 1
 let g:alternateRelativeFiles = 1
 
+let g:airline_powerline_fonts = 1
+
 let mapleader=","
 filetype on
 filetype plugin on
@@ -49,9 +50,9 @@ set autowrite
 set ruler
 
 set showcmd
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 set smartindent
@@ -92,7 +93,7 @@ nnoremap d<leader>g$ maj$mb`ad`b
 
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 nmap <leader>ev :tabedit ~/.vim/vimrc<cr>
-autocmd BufEnter * cd %:p:h
+autocmd BufEnter * if expand('%:p') !~ '://' | :lchdir %:p:h | endif
 set wildmenu
 set wildmode=list:longest
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -213,7 +214,7 @@ let g:haddock_browser = "/usr/bin/firefox-aurora"
 let g:GHCStaticOptions = "-O2"
 let g:haskell_jmacro        = 0
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
-let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-missing-signatures'
+let g:syntastic_haskell_ghc_mod_args = '--ghcOpts=-fno-warn-missing-signatures'
 
 hi ghcmodType ctermbg=yellow
 let g:ghcmod_type_highlight = 'ghcmodType'
