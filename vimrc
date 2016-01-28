@@ -68,6 +68,7 @@ set smartcase
 set foldenable
 set mousehide
 set mouse=a
+set diffopt=vertical
 
 set foldmethod=syntax
 nnoremap <leader>o zo
@@ -240,9 +241,9 @@ function! s:cabalrepl()
 endfunction
 
 
-let g:pymode_run_key = '<leader>R'
+let g:pymode_run_key = '<leader>RR'
 let g:pymode_lint_checher = "pyflakes"
-let g:jedi#rename_command = "<leader>RR"
+let g:jedi#rename_command = "<leader>RRR"
 
 " fugitive git bindings
 nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -260,6 +261,8 @@ nnoremap <leader>gb :Git branch<leader>
 nnoremap <leader>go :Git checkout<leader>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
+nnoremap <leader>dp :diffput<CR>
+nnoremap <leader>dg :diffget<CR>
 
 augroup filetype_clj
     autocmd!
@@ -276,3 +279,4 @@ let g:clojure_syntax_keywords = {
 
 nnoremap <leader>ce :Eval<CR>
 nnoremap <leader>%ce :%Eval<CR>
+nnoremap <leader>r zR
