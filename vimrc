@@ -280,3 +280,5 @@ let g:clojure_syntax_keywords = {
 nnoremap <leader>ce :Eval<CR>
 nnoremap <leader>%ce :%Eval<CR>
 nnoremap <leader>r zR
+
+au BufReadPost Jenkinsfile set syntax=groovy
