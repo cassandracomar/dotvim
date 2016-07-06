@@ -3,10 +3,11 @@ call pathogen#runtime_append_all_bundles()
 set t_Co=256
 set encoding=utf-8
 
-set gfn=Inconsolata\ 14
-set guifontwide=Ubuntu\ Mono\ 14
+set gfn=Inconsolata-dz\ 9
+set guifontwide=Ubuntu\ Mono\ 9
 
-colo wombat
+colo molokai
+let g:rehash=1
 filetype off
 set number
 nnoremap <F2> :set nonumber!<CR>
