@@ -139,3 +139,6 @@
 [submodule "bundle/wombat256mod"]
 	path = bundle/wombat256mod
 	url = https://github.com/michalbachowski/vim-wombat256mod.git
+[submodule "bundle/vim-terraform"]
+	path = bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
