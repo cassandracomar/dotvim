@@ -133,3 +133,12 @@
 [submodule "bundle/java"]
 	path = bundle/java
 	url = https://github.com/vim-scripts/java.vim
+[submodule "bundle/maven-plugin"]
+	path = bundle/maven-plugin
+	url = https://github.com/mikelue/vim-maven-plugin.git
+[submodule "bundle/wombat256mod"]
+	path = bundle/wombat256mod
+	url = https://github.com/michalbachowski/vim-wombat256mod.git
+[submodule "bundle/vim-terraform"]
+	path = bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
