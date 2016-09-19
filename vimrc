@@ -3,7 +3,7 @@ call pathogen#runtime_append_all_bundles()
 set t_Co=256
 set encoding=utf-8
 
-set gfn=Inconsolata-dz\ 9
+set gfn=Inconsolata-dz\ for\ Powerline\ Medium\ 12
 set guifontwide=Ubuntu\ Mono\ 9
 
 colo molokai
@@ -283,3 +283,6 @@ nnoremap <leader>%ce :%Eval<CR>
 nnoremap <leader>r zR
 
 au BufReadPost Jenkinsfile set syntax=groovy
+au BufReadPost Jenkinsfile set filetype=groovy
+
+hi! link Conceal Operator
