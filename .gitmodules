@@ -129,7 +129,7 @@
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "bundle/groovy"]
 	path = bundle/groovy
-	url = git@github.com:vim-scripts/groovy.vim.git
+	url = https://github.com/vim-scripts/groovy.vim.git
 [submodule "bundle/java"]
 	path = bundle/java
 	url = https://github.com/vim-scripts/java.vim
