@@ -266,6 +266,8 @@ nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 nnoremap <leader>dp :diffput<CR>
 nnoremap <leader>dg :diffget<CR>
+vnoremap <leader>dp :diffput<CR>
+vnoremap <leader>dg :diffget<CR>
 
 augroup filetype_clj
     autocmd!
@@ -286,5 +288,8 @@ nnoremap <leader>r zR
 
 au BufReadPost Jenkinsfile set syntax=groovy
 au BufReadPost Jenkinsfile set filetype=groovy
+
+au BufReadPost *.yaml.j2 set syntax=yaml
+au BufReadPost *.yaml.j2 set filetype=yaml
 
 hi! link Conceal Operator
